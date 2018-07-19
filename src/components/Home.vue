@@ -4,7 +4,6 @@
       <h1>Join the Web Developers Club!</h1>
       <p>Sign up to access our special, secret page. Just create an account and answer a brief survey.</p>
 
-      <!-- TODO: Add an HTML element to display an error message for when the user submits invalid information. Use v-show to show/hide this message based on the validity of the form data. -->
       <p class="error" v-show="showError"> Invalid Information. Please check the information submitted and try again.</p>
 
       <form v-on:submit.prevent="validateForm">
@@ -36,7 +35,7 @@
     <div class="success-message" v-show="!showForm">
       <h1>Thank you for signing up!</h1>
       <p>Please take our new member survey. <router-link to="Survey"> Click here</router-link>
-      </p><!-- TODO: Link "Click here" to the survey page. -->
+      </p>
     </div>
   </div>
 </template>
@@ -72,7 +71,7 @@ export default {
 
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+<!-- "scoped" attribute limits CSS to this component only -->
 <style scoped>
 .error {
   border: 1px solid #aa0000;
