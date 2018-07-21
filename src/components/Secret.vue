@@ -10,13 +10,12 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      message: 'Keep your code organized and leave yourself comments!'
-    }
+      message: "Keep your code organized and leave yourself comments!"
+    };
   }
-}
-
+};
 </script>
 
 <!-- "scoped" attribute limits CSS to this component only -->
@@ -26,7 +25,8 @@ export default {
   padding: 1rem;
   color: #aa0000;
 }
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
 }
 

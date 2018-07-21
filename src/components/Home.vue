@@ -4,28 +4,28 @@
       <h1>Join the Web Developers Club!</h1>
       <p>Sign up to access our special, secret page. Just create an account and answer a brief survey.</p>
 
-      <p class="error" v-show="showError"> Invalid Information. Please check the information submitted and try again.</p>
-
       <form v-on:submit.prevent="validateForm">
+        <div class="error" v-show="showError">
+          <p v-if="errors.length"> Invalid Information. Please correct the following: </p>
+          <ul>
+            <li v-for="error in errors"> {{ error }} </li>
+          </ul>        
+        </div>
         <p>
-            <label for="username">Username 
+            <label for="username">Username</label>
                 <input type="text" id="username" v-model="username">
-            </label>
         </p>
         <p>
-            <label for="email">Email 
+            <label for="email">Email</label> 
                 <input type="email" id="email" v-model="email">
-            </label>
         </p>
         <p>
-            <label for="password">Password 
+            <label for="password">Password</label> 
                 <input type="password" id="password" v-model="password">
-            </label>
         </p>
         <p>
-            <label for="passwordVerify">Verify Password 
+            <label for="passwordVerify">Verify Password</label> 
                 <input type="password" id="passwordVerify" v-model="passwordVerify">
-            </label>
         </p>
 
         <p><input type="submit" value="Submit"></p>
@@ -33,7 +33,7 @@
 
     </div>
     <div class="success-message" v-show="!showForm">
-      <h1>Thank you for signing up!</h1>
+      <h1> Welcome {{ username }}! Thank you for signing up!</h1>
       <p>Please take our new member survey. <router-link to="Survey"> Click here</router-link>
       </p>
     </div>
@@ -45,6 +45,7 @@ export default {
   name: 'Home',
   data () {
     return {
+      errors: [],
       username: '',
       email: '',
       password: '',
@@ -56,19 +57,57 @@ export default {
 
   methods: {
     validateForm: function () {
-      if ((this.username != '') &&
+      if((this.username != '') &&
         (this.email != '') &&
         (this.password != '') &&
         (this.password === this.passwordVerify)) {
-      this.showForm = false;
-        } else {
-          this.showForm = true;
-          this.showError = true;
-        }
+        this.showForm = false;
+      } 
+        
+      this.errors = [];
+      if (this.username === '') {
+        this.showError = true;
+        this.showForm = true;
+        this.errors.push("Username required.");
+        console.log('username is NOT valid');
+      }
+      if (this.email === '') {
+        this.showForm = true;       
+        this.showError = true;
+        this.errors.push("Email required.");
+        console.log('email is NOT valid.');
+      }
+      if ((this.password === '') ||
+         (this.passwordVerify === '')) {
+        this.showForm = true;          
+        this.showError = true;
+        this.errors.push("Password required.");
+        console.log('password is NOT valid.');        
+      } 
+      if (this.password != this.passwordVerify) {
+        this.showForm = true;          
+        this.showError = true;
+        this.errors.push("Passwords do not match.");
+        console.log('password is NOT valid.');        
+      }
+
+
+
+      // if ((this.password === '') ||
+      //    (this.passwordVerify === '') ||
+      //    (this.password != this.passwordVerify)) {
+      //   this.showForm = true;          
+      //   this.showError = true;
+      //   this.errors.push("Passwords do not match.");
+      //   console.log('password is NOT valid.');        
+      // } 
+      // else {
+      //   this.showForm = true;        
+      // }
     }
   }
 }
-
+        
 </script>
 
 <!-- "scoped" attribute limits CSS to this component only -->
@@ -80,16 +119,6 @@ export default {
 }
 h1, h2 {
   font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
 }
 
 a {
