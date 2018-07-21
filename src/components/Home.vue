@@ -90,20 +90,6 @@ export default {
         this.errors.push("Passwords do not match.");
         console.log('password is NOT valid.');        
       }
-
-
-
-      // if ((this.password === '') ||
-      //    (this.passwordVerify === '') ||
-      //    (this.password != this.passwordVerify)) {
-      //   this.showForm = true;          
-      //   this.showError = true;
-      //   this.errors.push("Passwords do not match.");
-      //   console.log('password is NOT valid.');        
-      // } 
-      // else {
-      //   this.showForm = true;        
-      // }
     }
   }
 }
